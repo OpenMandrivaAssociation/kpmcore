@@ -1,3 +1,7 @@
+%define major 1
+%define libname %mklibname %{name} %{major}
+%define develname %mklibname %{name} -d
+
 Summary:	Library for managing partitions
 Name:		kpmcore
 Version:	2.0.0
@@ -17,10 +21,27 @@ BuildRequires:	cmake(KF5I18n)
 BuildRequires:	cmake(KF5KIO)
 BuildRequires:	cmake(KF5IconThemes)
 BuildRequires:	cmake(KF5Service)
+Requires:	%{libname} = %{EVRD}
 
 %description
 Library for managing partitions.
 Common code for KDE Partition Manager and other projects.
+
+%package -n %{libname}
+Summary:	Main library for %{name}
+Group:		System/Libraries
+Requires:	%{name} = %{EVRD}
+
+%description -n %{libname}
+Main library for %{name}
+
+%package -n %{develname}
+Summary:	Development library for %{name}
+Group:		Development/KDE and Qt
+Requires:	%{libname} = %{EVRD}
+
+%description -n %{develname}
+Development library for %{name}
 
 %prep
 %setup -q
@@ -33,5 +54,21 @@ Common code for KDE Partition Manager and other projects.
 %install
 %ninja_install -C build
 
+%find_lang %{name}
 
-%files
+%files -f kpmcore.lang
+%{_qt5_pluginsdir}/*.so
+%{_datadir}/kservices5/*.desktop
+%{_datadir}/kservicetypes5/*.desktop
+
+%files -n %{libname}
+%{_libdir}/lib*%{name}.so.%{major}*
+# (tpg) wtf is this ?
+%{_libdir}/lib*%{name}.so.2*
+
+%files -n %{develname}
+%dir %{_libdir}/cmake/KPMcore
+%dir %{_includedir}/%{name}
+%{_libdir}/cmake/KPMcore/*.cmake
+%{_includedir}/%{name}/*
+%{_libdir}/lib*%{name}.so
