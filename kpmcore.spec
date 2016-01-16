@@ -57,7 +57,7 @@ Development library for %{name}
 %find_lang %{name}
 
 %files -f kpmcore.lang
-%{_qt5_pluginsdir}/*.so
+%{_qt5_plugindir}/*.so
 %{_datadir}/kservices5/*.desktop
 %{_datadir}/kservicetypes5/*.desktop
 
