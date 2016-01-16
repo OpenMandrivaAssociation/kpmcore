@@ -25,10 +25,10 @@ Common code for KDE Partition Manager and other projects.
 %prep
 %setup -q
 %apply_patches
+%cmake_kde5
 
 %build
-%cmake_qt5
-%ninja
+%ninja -C build
 
 %install
 %ninja_install -C build
