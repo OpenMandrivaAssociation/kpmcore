@@ -7,6 +7,7 @@ Group:		System/Libraries
 Url:		http://www.kde.org
 Source0:	http://download.kde.org/stable/kpmcore/%{version}/src/%{name}-%{version}.tar.xz
 BuildRequires:	cmake(ECM)
+BuildRequires:	pkgconfig(blkid)
 BuildRequires:	pkgconfig(Qt5Core) >= 5.3.0
 BuildRequires:	pkgconfig(Qt5Gui) >= 5.3.0
 BuildRequires:	pkgconfig(Qt5Widgets) >= 5.3.0
