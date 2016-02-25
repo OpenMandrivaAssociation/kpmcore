@@ -54,9 +54,7 @@ Development library for %{name}
 %install
 %ninja_install -C build
 
-%find_lang %{name}
-
-%files -f kpmcore.lang
+%files
 %{_qt5_plugindir}/*.so
 %{_datadir}/kservices5/*.desktop
 %{_datadir}/kservicetypes5/*.desktop
