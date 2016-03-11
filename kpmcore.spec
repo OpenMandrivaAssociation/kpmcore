@@ -9,7 +9,7 @@ Release:	1
 License:	GPLv3
 Group:		System/Libraries
 Url:		http://www.kde.org
-Source0:	http://download.kde.org/stable/kpmcore/%{version}/src/%{name}-%{version}.tar.gz
+Source0:	http://download.kde.org/stable/kpmcore/%{version}/src/%{name}-%{version}.tar.xz
 BuildRequires:	cmake(ECM)
 BuildRequires:	pkgconfig(blkid)
 BuildRequires:	pkgconfig(libatasmart)
