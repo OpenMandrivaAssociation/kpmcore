@@ -54,15 +54,15 @@ Development library for %{name}
 %install
 %ninja_install -C build
 
-%files
+%find_lang %{name}
+
+%files -f %{name}.lang
 %{_qt5_plugindir}/*.so
 %{_datadir}/kservices5/*.desktop
 %{_datadir}/kservicetypes5/*.desktop
 
 %files -n %{libname}
 %{_libdir}/lib*%{name}.so.%{major}*
-# (tpg) wtf is this ?
-%{_libdir}/lib*%{name}.so.2*
 
 %files -n %{develname}
 %dir %{_libdir}/cmake/KPMcore
