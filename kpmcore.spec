@@ -33,6 +33,7 @@ Requires:       btrfs-progs
 Requires:       f2fs-tools
 Requires:       gptfdisk
 Requires:       exfat-utils
+Requires:       lvm2
 
 %description
 Library for managing partitions.
