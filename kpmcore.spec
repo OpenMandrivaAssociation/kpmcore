@@ -4,7 +4,7 @@
 
 Summary:	Library for managing partitions
 Name:		kpmcore
-Version:	2.1.1
+Version:	2.2.0
 Release:	1
 License:	GPLv3
 Group:		System/Libraries
@@ -21,19 +21,19 @@ BuildRequires:	cmake(KF5I18n)
 BuildRequires:	cmake(KF5KIO)
 BuildRequires:	cmake(KF5IconThemes)
 BuildRequires:	cmake(KF5Service)
-Requires:	%{libname} = %{EVRD}
-Requires:	parted
-Requires:       e2fsprogs
-Requires:       xfsprogs
-Requires:       jfsutils
-Requires:       reiserfsprogs
-Requires:       ntfs-3g
-Requires:       dosfstools
-Requires:       btrfs-progs
-Requires:       f2fs-tools
-Requires:       gptfdisk
-Requires:       exfat-utils
-Requires:       lvm2
+Requires:		%{libname} = %{EVRD}
+Requires:		parted
+Requires:		e2fsprogs
+Requires:		xfsprogs
+Requires: 		jfsutils
+Requires:		reiserfsprogs
+Requires:		ntfs-3g
+Requires:		dosfstools
+Requires:		btrfs-progs
+Requires:		f2fs-tools
+Requires:		gptfdisk
+Requires:		exfat-utils
+Requires:		lvm2
 
 %description
 Library for managing partitions.
