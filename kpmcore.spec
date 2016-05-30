@@ -75,6 +75,7 @@ Development library for %{name}
 
 %files -n %{libname}
 %{_libdir}/lib*%{name}.so.%{major}*
+%{_libdir}/lib*%{name}.so.%{version}
 
 %files -n %{develname}
 %dir %{_libdir}/cmake/KPMcore
