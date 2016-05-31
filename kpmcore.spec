@@ -1,10 +1,10 @@
-%define major 2
+%define major 3
 %define libname %mklibname %{name} %{major}
 %define develname %mklibname %{name} -d
 
 Summary:	Library for managing partitions
 Name:		kpmcore
-Version:	2.1.1
+Version:	2.2.0
 Release:	1
 License:	GPLv3
 Group:		System/Libraries
@@ -21,19 +21,19 @@ BuildRequires:	cmake(KF5I18n)
 BuildRequires:	cmake(KF5KIO)
 BuildRequires:	cmake(KF5IconThemes)
 BuildRequires:	cmake(KF5Service)
-Requires:	%{libname} = %{EVRD}
-Requires:	parted
-Requires:       e2fsprogs
-Requires:       xfsprogs
-Requires:       jfsutils
-Requires:       reiserfsprogs
-Requires:       ntfs-3g
-Requires:       dosfstools
-Requires:       btrfs-progs
-Requires:       f2fs-tools
-Requires:       gptfdisk
-Requires:       exfat-utils
-Requires:       lvm2
+Requires:		%{libname} = %{EVRD}
+Requires:		parted
+Requires:		e2fsprogs
+Requires:		xfsprogs
+Requires: 		jfsutils
+Requires:		reiserfsprogs
+Requires:		ntfs-3g
+Requires:		dosfstools
+Requires:		btrfs-progs
+Requires:		f2fs-tools
+Requires:		gptfdisk
+Requires:		exfat-utils
+Requires:		lvm2
 
 %description
 Library for managing partitions.
@@ -75,6 +75,7 @@ Development library for %{name}
 
 %files -n %{libname}
 %{_libdir}/lib*%{name}.so.%{major}*
+%{_libdir}/lib*%{name}.so.%{version}
 
 %files -n %{develname}
 %dir %{_libdir}/cmake/KPMcore
