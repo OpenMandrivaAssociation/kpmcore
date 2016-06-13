@@ -1,0 +1,157 @@
+From 5e982b5b1e5faf5abdb4a6875079b900463335ba Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andrius=20=C5=A0tikonas?= <andrius@stikonas.eu>
+Date: Thu, 2 Jun 2016 13:46:16 +0100
+Subject: [PATCH] Fix memory leaks.
+
+---
+ src/plugins/libparted/libpartedbackend.cpp        | 24 ++++++++++++++---------
+ src/plugins/libparted/libpartedpartitiontable.cpp | 15 ++++++++++----
+ 2 files changed, 26 insertions(+), 13 deletions(-)
+
+diff --git a/src/plugins/libparted/libpartedbackend.cpp b/src/plugins/libparted/libpartedbackend.cpp
+index a6fa3c4..c7aa68c 100644
+--- a/src/plugins/libparted/libpartedbackend.cpp
++++ b/src/plugins/libparted/libpartedbackend.cpp
+@@ -143,6 +143,8 @@ static quint64 firstUsableSector(const Device& d)
+             rval += 32;
+     }
+ 
++    ped_disk_destroy(pedDisk);
++
+     return rval;
+ }
+ 
+@@ -171,6 +173,8 @@ static quint64 lastUsableSector(const Device& d)
+             rval -= 32;
+     }
+ 
++    ped_disk_destroy(pedDisk);
++
+     return rval;
+ }
+ 
+@@ -321,8 +325,8 @@ void LibPartedBackend::scanDevicePartitions(Device& d, PedDisk* pedDisk)
+ 
+         PartitionRole::Roles r = PartitionRole::None;
+ 
+-        char* pedPath = ped_partition_get_path(pedPartition);
+         FileSystem::Type type = FileSystem::Unknown;
++        char* pedPath = ped_partition_get_path(pedPartition);
+         if (pedPath)
+             type = detectFileSystem(QString::fromUtf8(pedPath));
+         free(pedPath);
+@@ -352,7 +356,9 @@ void LibPartedBackend::scanDevicePartitions(Device& d, PedDisk* pedDisk)
+         if (parent == nullptr)
+             parent = d.partitionTable();
+ 
+-        const QString node = QString::fromUtf8(ped_partition_get_path(pedPartition));
++        pedPath = ped_partition_get_path(pedPartition);
++        const QString node = QString::fromUtf8(pedPath);
++        free(pedPath);
+         FileSystem* fs = FileSystemFactory::create(type, pedPartition->geom.start, pedPartition->geom.end);
+ 
+         // libparted does not handle LUKS partitions
+@@ -445,6 +451,7 @@ Device* LibPartedBackend::scanDevice(const QString& device_node)
+         scanDevicePartitions(*d, pedDisk);
+     }
+ 
++    ped_device_destroy(pedDevice);
+     return d;
+ }
+ 
+@@ -495,9 +502,9 @@ FileSystem::Type LibPartedBackend::detectFileSystem(const QString& partitionPath
+         if ((dev = blkid_get_dev(cache,
+                                  partitionPath.toLocal8Bit().constData(),
+                                  BLKID_DEV_NORMAL)) != nullptr) {
+-            QString s = QString::fromUtf8(blkid_get_tag_value(cache,
+-                                                              "TYPE",
+-                                                              partitionPath.toLocal8Bit().constData()));
++            char *string = blkid_get_tag_value(cache, "TYPE", partitionPath.toLocal8Bit().constData());
++            QString s = QString::fromUtf8(string);
++            free(string);
+ 
+             if (s == QStringLiteral("ext2")) rval = FileSystem::Ext2;
+             else if (s == QStringLiteral("ext3")) rval = FileSystem::Ext3;
+@@ -513,9 +520,9 @@ FileSystem::Type LibPartedBackend::detectFileSystem(const QString& partitionPath
+             else if (s == QStringLiteral("ufs")) rval = FileSystem::Ufs;
+             else if (s == QStringLiteral("vfat")) {
+                 // libblkid uses SEC_TYPE to distinguish between FAT16 and FAT32
+-                QString st = QString::fromUtf8(blkid_get_tag_value(cache,
+-                                                                   "SEC_TYPE",
+-                                                                   partitionPath.toLocal8Bit().constData()));
++                string = blkid_get_tag_value(cache, "SEC_TYPE", partitionPath.toLocal8Bit().constData());
++                QString st = QString::fromUtf8(string);
++                free(string);
+                 if (st == QStringLiteral("msdos"))
+                     rval = FileSystem::Fat16;
+                 else
+@@ -582,5 +589,4 @@ QString LibPartedBackend::lastPartedExceptionMessage()
+     return s_lastPartedExceptionMessage;
+ }
+ 
+-
+ #include "libpartedbackend.moc"
+diff --git a/src/plugins/libparted/libpartedpartitiontable.cpp b/src/plugins/libparted/libpartedpartitiontable.cpp
+index 62d5cbc..9f5f4c6 100644
+--- a/src/plugins/libparted/libpartedpartitiontable.cpp
++++ b/src/plugins/libparted/libpartedpartitiontable.cpp
+@@ -44,8 +44,7 @@ LibPartedPartitionTable::LibPartedPartitionTable(PedDevice* device) :
+ 
+ LibPartedPartitionTable::~LibPartedPartitionTable()
+ {
+-    if (m_PedDisk != nullptr)
+-        ped_disk_destroy(m_PedDisk);
++    ped_disk_destroy(m_PedDisk);
+ }
+ 
+ bool LibPartedPartitionTable::open()
+@@ -167,14 +166,18 @@ QString LibPartedPartitionTable::createPartition(Report& report, const Partition
+ 
+     if (pedGeometry)
+         pedConstraint = ped_constraint_exact(pedGeometry);
++    ped_geometry_destroy(pedGeometry);
+ 
+     if (pedConstraint == nullptr) {
+         report.line() << i18nc("@info/plain", "Failed to create a new partition: could not get geometry for constraint.");
+         return QString();
+     }
+ 
+-    if (ped_disk_add_partition(pedDisk(), pedPartition, pedConstraint))
+-        rval = QString::fromUtf8(ped_partition_get_path(pedPartition));
++    if (ped_disk_add_partition(pedDisk(), pedPartition, pedConstraint)) {
++        char *pedPath = ped_partition_get_path(pedPartition);
++        rval = QString::fromUtf8(pedPath);
++        free(pedPath);
++    }
+     else {
+         report.line() << xi18nc("@info/plain", "Failed to add partition <filename>%1</filename> to device <filename>%2</filename>.", partition.deviceNode(), QString::fromUtf8(pedDisk()->dev->path));
+         report.line() << LibPartedBackend::lastPartedExceptionMessage();
+@@ -223,8 +226,10 @@ bool LibPartedPartitionTable::updateGeometry(Report& report, const Partition& pa
+                     rval = true;
+                 else
+                     report.line() << xi18nc("@info/plain", "Could not set geometry for partition <filename>%1</filename> while trying to resize/move it.", partition.deviceNode());
++                ped_constraint_destroy(pedConstraint);
+             } else
+                 report.line() << xi18nc("@info/plain", "Could not get constraint for partition <filename>%1</filename> while trying to resize/move it.", partition.deviceNode());
++            ped_geometry_destroy(pedGeometry);
+         } else
+             report.line() << xi18nc("@info/plain", "Could not get geometry for partition <filename>%1</filename> while trying to resize/move it.", partition.deviceNode());
+     } else
+@@ -283,12 +288,14 @@ bool LibPartedPartitionTable::resizeFileSystem(Report& report, const Partition&
+ 
+                 if (!rval)
+                     report.line() << xi18nc("@info/plain", "Could not resize file system on partition <filename>%1</filename>.", partition.deviceNode());
++                ped_geometry_destroy(resizedGeometry);
+             } else
+                 report.line() << xi18nc("@info/plain", "Could not get geometry for resized partition <filename>%1</filename> while trying to resize the file system.", partition.deviceNode());
+ 
+             ped_file_system_close(pedFileSystem);
+         } else
+             report.line() << xi18nc("@info/plain", "Could not open partition <filename>%1</filename> while trying to resize the file system.", partition.deviceNode());
++        ped_geometry_destroy(originalGeometry);
+     } else
+         report.line() << xi18nc("@info/plain", "Could not read geometry for partition <filename>%1</filename> while trying to resize the file system.", partition.deviceNode());
+ #else
+-- 
+1.9.5
+

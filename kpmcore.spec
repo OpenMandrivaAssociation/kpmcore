@@ -5,11 +5,14 @@
 Summary:	Library for managing partitions
 Name:		kpmcore
 Version:	2.2.0
-Release:	1
+Release:	2
 License:	GPLv3
 Group:		System/Libraries
 Url:		http://www.kde.org
 Source0:	http://download.kde.org/stable/kpmcore/%{version}/src/%{name}-%{version}.tar.xz
+# (tpg) from upstream git
+Patch0:		0000-Make-sure-file-system-is-not-mounted-before-deleting.patch
+Patch1:		0001-Fix-memory-leaks.patch
 BuildRequires:	cmake(ECM)
 BuildRequires:	pkgconfig(blkid)
 BuildRequires:	pkgconfig(libatasmart)
@@ -21,19 +24,19 @@ BuildRequires:	cmake(KF5I18n)
 BuildRequires:	cmake(KF5KIO)
 BuildRequires:	cmake(KF5IconThemes)
 BuildRequires:	cmake(KF5Service)
-Requires:		%{libname} = %{EVRD}
-Requires:		parted
-Requires:		e2fsprogs
-Requires:		xfsprogs
-Requires: 		jfsutils
-Requires:		reiserfsprogs
-Requires:		ntfs-3g
-Requires:		dosfstools
-Requires:		btrfs-progs
-Requires:		f2fs-tools
-Requires:		gptfdisk
-Requires:		exfat-utils
-Requires:		lvm2
+Requires:	%{libname} = %{EVRD}
+Requires:	parted
+Requires:	e2fsprogs
+Requires:	xfsprogs
+Requires:	jfsutils
+Requires:	reiserfsprogs
+Requires:	ntfs-3g
+Requires:	dosfstools
+Requires:	btrfs-progs
+Requires:	f2fs-tools
+Requires:	gptfdisk
+Requires:	exfat-utils
+Requires:	lvm2
 
 %description
 Library for managing partitions.
