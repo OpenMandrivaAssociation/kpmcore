@@ -1,0 +1,39 @@
+From 8ae2ea3006834b335d624758da1c52a8e901b391 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andrius=20=C5=A0tikonas?= <andrius@stikonas.eu>
+Date: Thu, 26 May 2016 18:47:34 +0100
+Subject: [PATCH] Make sure file system is not mounted before deleting it.
+ Sometimes user might try to mount manually and then delete partition without
+ refreshing state in KPM.
+
+---
+ src/jobs/deletefilesystemjob.cpp | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+diff --git a/src/jobs/deletefilesystemjob.cpp b/src/jobs/deletefilesystemjob.cpp
+index 59940dd..60fc263 100644
+--- a/src/jobs/deletefilesystemjob.cpp
++++ b/src/jobs/deletefilesystemjob.cpp
+@@ -26,6 +26,7 @@
+ #include "core/partition.h"
+ #include "core/device.h"
+ 
++#include "util/helpers.h"
+ #include "util/report.h"
+ 
+ #include <QDebug>
+@@ -56,6 +57,12 @@ bool DeleteFileSystemJob::run(Report& parent)
+ 
+     Report* report = jobStarted(parent);
+ 
++    if (isMounted(partition().partitionPath())) {
++        report->line() << xi18nc("@info/plain", "Could not delete file system: file system on <filename>%1</filename> is mounted.", partition().deviceNode());
++        jobFinished(*report, rval);
++        return false;
++    }
++
+     if (partition().roles().has(PartitionRole::Extended))
+         rval = true;
+     else {
+-- 
+1.9.5
+
