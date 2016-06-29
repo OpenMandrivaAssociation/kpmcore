@@ -1,7 +1,7 @@
 From 2514f7d8f4aea875e0777ee2a77c1902c880e1ab Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andrius=20=C5=A0tikonas?= <andrius@stikonas.eu>
 Date: Sun, 12 Jun 2016 13:33:04 +0100
-Subject: [PATCH 8/9] Use diskdev_cmds instead of obsolete hfsplusutils for
+Subject: [PATCH 6/7] Use diskdev_cmds instead of obsolete hfsplusutils for
  HFS+ file systems.
 
 ---

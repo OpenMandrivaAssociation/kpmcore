@@ -1,7 +1,7 @@
 From 09711cdf1de6855ab3b913e649a5d78d8a53f767 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andrius=20=C5=A0tikonas?= <andrius@stikonas.eu>
 Date: Wed, 1 Jun 2016 21:00:31 +0100
-Subject: [PATCH 3/9] Whitespace fixes.
+Subject: [PATCH 1/7] Whitespace fixes.
 
 ---
  src/core/devicescanner.cpp  |  2 +-

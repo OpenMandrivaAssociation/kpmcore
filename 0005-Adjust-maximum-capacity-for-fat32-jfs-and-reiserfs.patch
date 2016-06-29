@@ -1,7 +1,7 @@
 From b6911285dc2678d7190f1174cea2548ec83c5329 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andrius=20=C5=A0tikonas?= <andrius@stikonas.eu>
 Date: Thu, 9 Jun 2016 22:07:23 +0100
-Subject: [PATCH 7/9] Adjust maximum capacity for fat32, jfs and reiserfs.
+Subject: [PATCH 5/7] Adjust maximum capacity for fat32, jfs and reiserfs.
 
 ---
  src/fs/fat32.cpp    | 2 +-

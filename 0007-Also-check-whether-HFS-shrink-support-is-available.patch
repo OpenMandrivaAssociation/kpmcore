@@ -1,7 +1,7 @@
 From e437da60918b1218489b98d8c9d15a5d8f186000 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andrius=20=C5=A0tikonas?= <andrius@stikonas.eu>
 Date: Sun, 12 Jun 2016 16:15:18 +0100
-Subject: [PATCH 9/9] Also check whether HFS+ shrink support is available.
+Subject: [PATCH 7/7] Also check whether HFS+ shrink support is available.
 
 ---
  src/fs/hfsplus.cpp | 4 ++--

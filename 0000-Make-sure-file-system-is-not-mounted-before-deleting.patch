@@ -1,7 +1,7 @@
 From 8ae2ea3006834b335d624758da1c52a8e901b391 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andrius=20=C5=A0tikonas?= <andrius@stikonas.eu>
 Date: Thu, 26 May 2016 18:47:34 +0100
-Subject: [PATCH] Make sure file system is not mounted before deleting it.
+Subject: [PATCH 0/7] Make sure file system is not mounted before deleting it.
  Sometimes user might try to mount manually and then delete partition without
  refreshing state in KPM.
 
@@ -35,5 +35,5 @@ index 59940dd..60fc263 100644
          rval = true;
      else {
 -- 
-1.9.5
+2.8.3
 

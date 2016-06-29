@@ -1,7 +1,7 @@
 From 5e982b5b1e5faf5abdb4a6875079b900463335ba Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andrius=20=C5=A0tikonas?= <andrius@stikonas.eu>
 Date: Thu, 2 Jun 2016 13:46:16 +0100
-Subject: [PATCH 4/9] Fix memory leaks.
+Subject: [PATCH 2/7] Fix memory leaks.
 
 ---
  src/plugins/libparted/libpartedbackend.cpp        | 24 ++++++++++++++---------
