@@ -1,0 +1,39 @@
+From 35c7f9749e329063ab314470a95edf941c365caf Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andrius=20=C5=A0tikonas?= <andrius@stikonas.eu>
+Date: Thu, 9 Jun 2016 19:46:21 +0100
+Subject: [PATCH 6/9] Also reduce max capacity for ext2 and ext3 file systems.
+
+---
+ src/fs/ext2.cpp | 2 +-
+ src/fs/ext3.cpp | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/fs/ext2.cpp b/src/fs/ext2.cpp
+index 5646d2c..533b92d 100644
+--- a/src/fs/ext2.cpp
++++ b/src/fs/ext2.cpp
+@@ -84,7 +84,7 @@ FileSystem::SupportTool ext2::supportToolName() const
+ 
+ qint64 ext2::maxCapacity() const
+ {
+-    return 32 * Capacity::unitFactor(Capacity::Byte, Capacity::TiB);
++    return 16 * Capacity::unitFactor(Capacity::Byte, Capacity::TiB) - Capacity::unitFactor(Capacity::Byte, Capacity::MiB);
+ }
+ 
+ qint64 ext2::maxLabelLength() const
+diff --git a/src/fs/ext3.cpp b/src/fs/ext3.cpp
+index c8f3de2..aa6d9f8 100644
+--- a/src/fs/ext3.cpp
++++ b/src/fs/ext3.cpp
+@@ -31,7 +31,7 @@ ext3::ext3(qint64 firstsector, qint64 lastsector, qint64 sectorsused, const QStr
+ 
+ qint64 ext3::maxCapacity() const
+ {
+-    return 32 * Capacity::unitFactor(Capacity::Byte, Capacity::TiB);
++    return 16 * Capacity::unitFactor(Capacity::Byte, Capacity::TiB) - Capacity::unitFactor(Capacity::Byte, Capacity::MiB);
+ }
+ 
+ bool ext3::create(Report& report, const QString& deviceNode) const
+-- 
+2.8.3
+

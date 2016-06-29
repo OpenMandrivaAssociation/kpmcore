@@ -5,14 +5,22 @@
 Summary:	Library for managing partitions
 Name:		kpmcore
 Version:	2.2.0
-Release:	2
+Release:	3
 License:	GPLv3
 Group:		System/Libraries
 Url:		http://www.kde.org
 Source0:	http://download.kde.org/stable/kpmcore/%{version}/src/%{name}-%{version}.tar.xz
 # (tpg) from upstream git
-Patch0:		0000-Make-sure-file-system-is-not-mounted-before-deleting.patch
-Patch1:		0001-Fix-memory-leaks.patch
+Patch0:		0000-Convert-remaining-signals-to-the-new-syntax.patch
+Patch1:		0001-Disable-MountPointDialog-for-swap-lvm-pv-and-unknown.patch
+Patch2:		0002-Make-sure-file-system-is-not-mounted-before-deleting.patch
+Patch3:		0003-Whitespace-fixes.patch
+Patch4:		0004-Fix-memory-leaks.patch
+Patch5:		0005-Reduce-maximum-capacity-of-FAT16-file-systems-by-1-M.patch
+Patch6:		0006-Also-reduce-max-capacity-for-ext2-and-ext3-file-syst.patch
+Patch7:		0007-Adjust-maximum-capacity-for-fat32-jfs-and-reiserfs.patch
+Patch8:		0008-Use-diskdev_cmds-instead-of-obsolete-hfsplusutils-fo.patch
+Patch9:		0009-Also-check-whether-HFS-shrink-support-is-available.patch
 BuildRequires:	cmake(ECM)
 BuildRequires:	pkgconfig(blkid)
 BuildRequires:	pkgconfig(libatasmart)

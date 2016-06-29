@@ -1,0 +1,25 @@
+From 3756ec45da4b9a3a6b66e8f7c66492c9493d9f1e Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andrius=20=C5=A0tikonas?= <andrius@stikonas.eu>
+Date: Thu, 9 Jun 2016 19:22:56 +0100
+Subject: [PATCH 5/9] Reduce maximum capacity of FAT16 file systems by 1 MiB.
+
+---
+ src/fs/fat16.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/fs/fat16.cpp b/src/fs/fat16.cpp
+index 24dea32..8882054 100644
+--- a/src/fs/fat16.cpp
++++ b/src/fs/fat16.cpp
+@@ -94,7 +94,7 @@ qint64 fat16::minCapacity() const
+ 
+ qint64 fat16::maxCapacity() const
+ {
+-    return 4 * Capacity::unitFactor(Capacity::Byte, Capacity::GiB);
++    return 4 * Capacity::unitFactor(Capacity::Byte, Capacity::GiB) - Capacity::unitFactor(Capacity::Byte, Capacity::MiB);
+ }
+ 
+ qint64 fat16::maxLabelLength() const
+-- 
+2.8.3
+

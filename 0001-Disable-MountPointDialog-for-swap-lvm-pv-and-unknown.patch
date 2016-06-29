@@ -1,0 +1,97 @@
+From 0c70c66aaec098e94ea6c44e6430bd52f0a4b956 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andrius=20=C5=A0tikonas?= <andrius@stikonas.eu>
+Date: Tue, 24 May 2016 17:26:12 +0100
+Subject: [PATCH 1/9] Disable MountPointDialog for swap, lvm pv and unknown
+ partitions.
+
+---
+ src/fs/linuxswap.cpp | 5 +++--
+ src/fs/lvm2_pv.cpp   | 7 +++++++
+ src/fs/lvm2_pv.h     | 1 +
+ src/fs/unknown.cpp   | 7 +++++++
+ src/fs/unknown.h     | 1 +
+ 5 files changed, 19 insertions(+), 2 deletions(-)
+
+diff --git a/src/fs/linuxswap.cpp b/src/fs/linuxswap.cpp
+index 4664a3c..51f8479 100644
+--- a/src/fs/linuxswap.cpp
++++ b/src/fs/linuxswap.cpp
+@@ -21,6 +21,7 @@
+ #include "util/externalcommand.h"
+ 
+ #include <KLocalizedString>
++#include <QDebug>
+ 
+ namespace FS
+ {
+@@ -134,9 +135,9 @@ QString linuxswap::unmountTitle() const
+ 
+ bool linuxswap::canMount(const QString& deviceNode, const QString& mountPoint) const {
+     Q_UNUSED(deviceNode);
+-    Q_UNUSED(mountPoint);
+     // linux swap doesn't require mount point to activate
+-    return true;
++    qDebug() << mountPoint;
++    return mountPoint != QStringLiteral("/");
+ }
+ 
+ bool linuxswap::mount(Report& report, const QString& deviceNode, const QString& mountPoint)
+diff --git a/src/fs/lvm2_pv.cpp b/src/fs/lvm2_pv.cpp
+index 5af3c7c..6b0dbae 100644
+--- a/src/fs/lvm2_pv.cpp
++++ b/src/fs/lvm2_pv.cpp
+@@ -110,4 +110,11 @@ bool lvm2_pv::updateUUID(Report& report, const QString& deviceNode) const
+     ExternalCommand cmd(report, QStringLiteral("lvm"), { QStringLiteral("pvchange"), QStringLiteral("--uuid"), deviceNode });
+     return cmd.run(-1) && cmd.exitCode() == 0;
+ }
++
++bool lvm2_pv::canMount(const QString & deviceNode, const QString & mountPoint) const
++{
++    Q_UNUSED(deviceNode)
++    Q_UNUSED(mountPoint)
++    return false;
++}
+ }
+diff --git a/src/fs/lvm2_pv.h b/src/fs/lvm2_pv.h
+index 398fce5..f367ace 100644
+--- a/src/fs/lvm2_pv.h
++++ b/src/fs/lvm2_pv.h
+@@ -50,6 +50,7 @@ public:
+ //          bool resize(Report& report, const QString& deviceNode, qint64 length) const override;
+ //          bool writeLabel(Report& report, const QString& deviceNode, const QString& newLabel) override;
+     bool updateUUID(Report& report, const QString& deviceNode) const override;
++    bool canMount(const QString & deviceNode, const QString & mountPoint) const override;
+ 
+     CommandSupportType supportGetUsed() const override {
+         return m_GetUsed;
+diff --git a/src/fs/unknown.cpp b/src/fs/unknown.cpp
+index 9dbbfe6..5b0a552 100644
+--- a/src/fs/unknown.cpp
++++ b/src/fs/unknown.cpp
+@@ -23,4 +23,11 @@ unknown::unknown(qint64 firstsector, qint64 lastsector, qint64 sectorsused, cons
+     FileSystem(firstsector, lastsector, sectorsused, label, FileSystem::Unknown)
+ {
+ }
++
++bool unknown::canMount(const QString & deviceNode, const QString & mountPoint) const
++{
++    Q_UNUSED(deviceNode)
++    Q_UNUSED(mountPoint)
++    return false;
++}
+ }
+diff --git a/src/fs/unknown.h b/src/fs/unknown.h
+index 743ae92..e427834 100644
+--- a/src/fs/unknown.h
++++ b/src/fs/unknown.h
+@@ -39,6 +39,7 @@ public:
+     bool supportToolFound() const override {
+         return true;
+     }
++    bool canMount(const QString & deviceNode, const QString & mountPoint) const override;
+ };
+ }
+ 
+-- 
+2.8.3
+

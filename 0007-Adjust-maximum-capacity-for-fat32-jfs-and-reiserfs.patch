@@ -1,0 +1,53 @@
+From b6911285dc2678d7190f1174cea2548ec83c5329 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andrius=20=C5=A0tikonas?= <andrius@stikonas.eu>
+Date: Thu, 9 Jun 2016 22:07:23 +0100
+Subject: [PATCH 7/9] Adjust maximum capacity for fat32, jfs and reiserfs.
+
+---
+ src/fs/fat32.cpp    | 2 +-
+ src/fs/jfs.cpp      | 2 +-
+ src/fs/reiserfs.cpp | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/src/fs/fat32.cpp b/src/fs/fat32.cpp
+index 8ab35b5..075b516 100644
+--- a/src/fs/fat32.cpp
++++ b/src/fs/fat32.cpp
+@@ -37,7 +37,7 @@ qint64 fat32::minCapacity() const
+ 
+ qint64 fat32::maxCapacity() const
+ {
+-    return 16 * Capacity::unitFactor(Capacity::Byte, Capacity::TiB);
++    return 16 * Capacity::unitFactor(Capacity::Byte, Capacity::TiB) - Capacity::unitFactor(Capacity::Byte, Capacity::MiB);
+ }
+ 
+ bool fat32::create(Report& report, const QString& deviceNode) const
+diff --git a/src/fs/jfs.cpp b/src/fs/jfs.cpp
+index bd1c0ed..8d1ba44 100644
+--- a/src/fs/jfs.cpp
++++ b/src/fs/jfs.cpp
+@@ -86,7 +86,7 @@ qint64 jfs::minCapacity() const
+ 
+ qint64 jfs::maxCapacity() const
+ {
+-    return 32 * Capacity::unitFactor(Capacity::Byte, Capacity::PiB);
++    return 16 * Capacity::unitFactor(Capacity::Byte, Capacity::TiB);
+ }
+ 
+ qint64 jfs::maxLabelLength() const
+diff --git a/src/fs/reiserfs.cpp b/src/fs/reiserfs.cpp
+index baacc0f..d3eea02 100644
+--- a/src/fs/reiserfs.cpp
++++ b/src/fs/reiserfs.cpp
+@@ -90,7 +90,7 @@ qint64 reiserfs::minCapacity() const
+ 
+ qint64 reiserfs::maxCapacity() const
+ {
+-    return 16 * Capacity::unitFactor(Capacity::Byte, Capacity::TiB);
++    return 16 * Capacity::unitFactor(Capacity::Byte, Capacity::TiB) - Capacity::unitFactor(Capacity::Byte, Capacity::MiB);
+ }
+ 
+ qint64 reiserfs::maxLabelLength() const
+-- 
+2.8.3
+
