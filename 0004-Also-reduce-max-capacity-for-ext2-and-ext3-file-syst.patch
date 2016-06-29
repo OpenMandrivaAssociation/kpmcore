@@ -1,7 +1,7 @@
 From 35c7f9749e329063ab314470a95edf941c365caf Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andrius=20=C5=A0tikonas?= <andrius@stikonas.eu>
 Date: Thu, 9 Jun 2016 19:46:21 +0100
-Subject: [PATCH 6/9] Also reduce max capacity for ext2 and ext3 file systems.
+Subject: [PATCH 4/7] Also reduce max capacity for ext2 and ext3 file systems.
 
 ---
  src/fs/ext2.cpp | 2 +-

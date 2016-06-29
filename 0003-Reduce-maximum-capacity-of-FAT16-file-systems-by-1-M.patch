@@ -1,7 +1,7 @@
 From 3756ec45da4b9a3a6b66e8f7c66492c9493d9f1e Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andrius=20=C5=A0tikonas?= <andrius@stikonas.eu>
 Date: Thu, 9 Jun 2016 19:22:56 +0100
-Subject: [PATCH 5/9] Reduce maximum capacity of FAT16 file systems by 1 MiB.
+Subject: [PATCH 3/7] Reduce maximum capacity of FAT16 file systems by 1 MiB.
 
 ---
  src/fs/fat16.cpp | 2 +-
