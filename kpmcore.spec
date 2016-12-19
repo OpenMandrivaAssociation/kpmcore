@@ -1,10 +1,10 @@
-%define major 3
+%define major 4
 %define libname %mklibname %{name} %{major}
 %define develname %mklibname %{name} -d
 
 Summary:	Library for managing partitions
 Name:		kpmcore
-Version:	2.2.1
+Version:	3.0.0
 Release:	1
 License:	GPLv3
 Group:		System/Libraries
@@ -21,6 +21,7 @@ BuildRequires:	cmake(KF5I18n)
 BuildRequires:	cmake(KF5KIO)
 BuildRequires:	cmake(KF5IconThemes)
 BuildRequires:	cmake(KF5Service)
+BuildRequires:	cmake(KF5WidgetsAddons)
 Requires:	%{libname} = %{EVRD}
 Requires:	parted
 Requires:	e2fsprogs
