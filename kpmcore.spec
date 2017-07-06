@@ -4,7 +4,7 @@
 
 Summary:	Library for managing partitions
 Name:		kpmcore
-Version:	3.1.0
+Version:	3.1.2
 Release:	1
 License:	GPLv3
 Group:		System/Libraries
