@@ -1,10 +1,10 @@
-%define major 5
+%define major 6
 %define libname %mklibname %{name} %{major}
 %define develname %mklibname %{name} -d
 
 Summary:	Library for managing partitions
 Name:		kpmcore
-Version:	3.1.2
+Version:	3.2.0
 Release:	1
 License:	GPLv3
 Group:		System/Libraries
