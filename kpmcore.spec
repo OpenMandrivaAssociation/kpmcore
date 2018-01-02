@@ -1,10 +1,10 @@
-%define major 6
+%define major 7
 %define libname %mklibname %{name} %{major}
 %define develname %mklibname %{name} -d
 
 Summary:	Library for managing partitions
 Name:		kpmcore
-Version:	3.2.1
+Version:	3.3.0
 Release:	1
 License:	GPLv3
 Group:		System/Libraries
@@ -15,6 +15,7 @@ BuildRequires:	pkgconfig(blkid)
 BuildRequires:	pkgconfig(libatasmart)
 BuildRequires:	pkgconfig(libparted)
 BuildRequires:	pkgconfig(Qt5Core) >= 5.3.0
+BuildRequires:	pkgconfig(Qt5DBus) >= 5.3.0
 BuildRequires:	pkgconfig(Qt5Gui) >= 5.3.0
 BuildRequires:	pkgconfig(Qt5Widgets) >= 5.3.0
 BuildRequires:	cmake(KF5I18n)
