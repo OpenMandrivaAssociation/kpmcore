@@ -5,7 +5,7 @@
 Summary:	Library for managing partitions
 Name:		kpmcore
 Version:	3.3.0
-Release:	1
+Release:	2
 License:	GPLv3
 Group:		System/Libraries
 Url:		http://www.kde.org
@@ -44,10 +44,9 @@ Common code for KDE Partition Manager and other projects.
 %package -n %{libname}
 Summary:	Main library for %{name}
 Group:		System/Libraries
-Requires:	%{name} = %{EVRD}
 
 %description -n %{libname}
-Main library for %{name}
+Main library for %{name}.
 
 %package -n %{develname}
 Summary:	Development library for %{name}
@@ -55,7 +54,7 @@ Group:		Development/KDE and Qt
 Requires:	%{libname} = %{EVRD}
 
 %description -n %{develname}
-Development library for %{name}
+Development library for %{name}.
 
 %prep
 %setup -q
