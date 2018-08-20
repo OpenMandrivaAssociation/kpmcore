@@ -1,11 +1,12 @@
 %define major 7
 %define libname %mklibname %{name} %{major}
+%define oldlibname %mklibname %{name} 6
 %define develname %mklibname %{name} -d
 
 Summary:	Library for managing partitions
 Name:		kpmcore
 Version:	3.3.0
-Release:	2
+Release:	3
 License:	GPLv3
 Group:		System/Libraries
 Url:		http://www.kde.org
@@ -44,6 +45,7 @@ Common code for KDE Partition Manager and other projects.
 %package -n %{libname}
 Summary:	Main library for %{name}
 Group:		System/Libraries
+Obsoletes:	%{oldlibname} < %{EVRD}
 
 %description -n %{libname}
 Main library for %{name}.
