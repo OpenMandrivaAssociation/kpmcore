@@ -1,11 +1,11 @@
-%define major 7
+%define major 8
 %define libname %mklibname %{name} %{major}
 %define develname %mklibname %{name} -d
 
 Summary:	Library for managing partitions
 Name:		kpmcore
-Version:	3.3.0
-Release:	5
+Version:	3.3.0.20190111
+Release:	1
 License:	GPLv3
 Group:		System/Libraries
 Url:		http://www.kde.org
@@ -24,6 +24,7 @@ BuildRequires:	cmake(KF5IconThemes)
 BuildRequires:	cmake(KF5Service)
 BuildRequires:	cmake(KF5WidgetsAddons)
 Requires:	%{libname} = %{EVRD}
+Requires:	gptfdisk
 Requires:	parted
 Requires:	e2fsprogs
 Requires:	xfsprogs
@@ -66,12 +67,19 @@ Development library for %{name}.
 %install
 %ninja_install -C build
 
-%find_lang %{name}
+#find_lang %{name}
 
-%files -f %{name}.lang
+%files
+# -f %{name}.lang
 %{_qt5_plugindir}/*.so
-%{_datadir}/kservices5/*.desktop
-%{_datadir}/kservicetypes5/*.desktop
+#%{_datadir}/kservices5/*.desktop
+#%{_datadir}/kservicetypes5/*.desktop
+%{_sysconfdir}/dbus-1/system.d/org.kde.kpmcore.applicationinterface.conf
+%{_sysconfdir}/dbus-1/system.d/org.kde.kpmcore.externalcommand.conf
+%{_sysconfdir}/dbus-1/system.d/org.kde.kpmcore.helperinterface.conf
+%{_libdir}/libexec/kauth/kpmcore_externalcommand
+%{_datadir}/dbus-1/system-services/org.kde.kpmcore.externalcommand.service
+%{_datadir}/polkit-1/actions/org.kde.kpmcore.externalcommand.policy
 
 %files -n %{libname}
 %{_libdir}/lib*%{name}.so.%{major}*
