@@ -23,6 +23,7 @@ BuildRequires:	cmake(KF5KIO)
 BuildRequires:	cmake(KF5IconThemes)
 BuildRequires:	cmake(KF5Service)
 BuildRequires:	cmake(KF5WidgetsAddons)
+BuildRequires:	cmake(Qca-qt5)
 Requires:	%{libname} = %{EVRD}
 Requires:	gptfdisk
 Requires:	parted
