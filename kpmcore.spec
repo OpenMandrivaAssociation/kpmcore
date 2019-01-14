@@ -5,13 +5,13 @@
 Summary:	Library for managing partitions
 Name:		kpmcore
 Version:	3.3.0.20190111
-Release:	1
+Release:	2
 License:	GPLv3
 Group:		System/Libraries
 Url:		http://www.kde.org
 Source0:	http://download.kde.org/stable/kpmcore/%{version}/src/%{name}-%{version}.tar.xz
 BuildRequires:	cmake(ECM)
-BuildRequires:	pkgconfig(blkid)
+BuildRequires:	pkgconfig(blkid) >= 2.32
 BuildRequires:	pkgconfig(libatasmart)
 BuildRequires:	pkgconfig(libparted)
 BuildRequires:	pkgconfig(Qt5Core) >= 5.3.0
@@ -23,10 +23,9 @@ BuildRequires:	cmake(KF5KIO)
 BuildRequires:	cmake(KF5IconThemes)
 BuildRequires:	cmake(KF5Service)
 BuildRequires:	cmake(KF5WidgetsAddons)
+BuildRequires:	cmake(KF5Auth)
 BuildRequires:	cmake(Qca-qt5)
 Requires:	%{libname} = %{EVRD}
-Requires:	gptfdisk
-Requires:	parted
 Requires:	e2fsprogs
 Requires:	xfsprogs
 Requires:	jfsutils
@@ -38,6 +37,7 @@ Requires:	f2fs-tools
 Requires:	gptfdisk
 Requires:	exfat-utils
 Requires:	lvm2
+Requires:	fatresize
 
 %description
 Library for managing partitions.
