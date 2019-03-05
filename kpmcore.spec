@@ -5,7 +5,7 @@
 Summary:	Library for managing partitions
 Name:		kpmcore
 Version:	3.3.0.20190111
-Release:	3
+Release:	4
 License:	GPLv3
 Group:		System/Libraries
 Url:		http://www.kde.org
@@ -38,6 +38,7 @@ Requires:	gptfdisk
 Requires:	exfat-utils
 Requires:	lvm2
 Requires:	fatresize
+Requires:	%{_lib}qca2-plugin-openssl
 Patch1:		fix-for-cala-bug1071.patch
 Patch2: 	better-disk-names.patch
 
