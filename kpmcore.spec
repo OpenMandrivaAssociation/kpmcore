@@ -4,14 +4,14 @@
 
 Summary:	Library for managing partitions
 Name:		kpmcore
-Version:	3.3.0.20190111
-Release:	4
+Version:	4.0.0
+Release:	1
 License:	GPLv3
 Group:		System/Libraries
 Url:		http://www.kde.org
 Source0:	http://download.kde.org/stable/kpmcore/%{version}/src/%{name}-%{version}.tar.xz
 BuildRequires:	cmake(ECM)
-BuildRequires:	pkgconfig(blkid) >= 2.32
+BuildRequires:	pkgconfig(blkid) >= 2.33.2
 BuildRequires:	pkgconfig(libatasmart)
 BuildRequires:	pkgconfig(libparted)
 BuildRequires:	pkgconfig(Qt5Core) >= 5.3.0
@@ -39,8 +39,6 @@ Requires:	exfat-utils
 Requires:	lvm2
 Requires:	fatresize
 Requires:	%{_lib}qca2-plugin-openssl
-Patch1:		fix-for-cala-bug1071.patch
-Patch2: 	better-disk-names.patch
 
 %description
 Library for managing partitions.
@@ -71,10 +69,9 @@ Development library for %{name}.
 %install
 %ninja_install -C build
 
-#find_lang %{name}
+%find_lang %{name}
 
-%files
-# -f %{name}.lang
+%files -f %{name}.lang
 %{_qt5_plugindir}/*.so
 #%{_datadir}/kservices5/*.desktop
 #%{_datadir}/kservicetypes5/*.desktop
@@ -87,7 +84,7 @@ Development library for %{name}.
 
 %files -n %{libname}
 %{_libdir}/lib*%{name}.so.%{major}*
-%{_libdir}/lib*%{name}.so.3.*
+%{_libdir}/lib*%{name}.so.4.*
 
 %files -n %{develname}
 %dir %{_libdir}/cmake/KPMcore
