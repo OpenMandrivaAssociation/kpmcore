@@ -5,7 +5,7 @@
 Summary:	Library for managing partitions
 Name:		kpmcore
 Version:	4.0.0
-Release:	1
+Release:	2
 License:	GPLv3
 Group:		System/Libraries
 Url:		http://www.kde.org
@@ -26,19 +26,6 @@ BuildRequires:	cmake(KF5WidgetsAddons)
 BuildRequires:	cmake(KF5Auth)
 BuildRequires:	cmake(Qca-qt5)
 Requires:	%{libname} = %{EVRD}
-Requires:	e2fsprogs
-Requires:	xfsprogs
-Requires:	jfsutils
-Requires:	reiserfsprogs
-Requires:	ntfs-3g
-Requires:	dosfstools
-Requires:	btrfs-progs
-Requires:	f2fs-tools
-Requires:	gptfdisk
-Requires:	exfat-utils
-Requires:	lvm2
-Requires:	fatresize
-Requires:	%{_lib}qca2-plugin-openssl
 
 %description
 Library for managing partitions.
@@ -47,6 +34,19 @@ Common code for KDE Partition Manager and other projects.
 %package -n %{libname}
 Summary:	Main library for %{name}
 Group:		System/Libraries
+Requires:	%{_lib}qca2-plugin-openssl
+Requires:	e2fsprogs
+Requires:	dosfstools
+Requires:	fatresize
+Requires:	xfsprogs
+Suggests:	jfsutils
+Suggests:	reiserfsprogs
+Suggests:	ntfs-3g
+Requires:	btrfs-progs
+Suggests:	f2fs-tools
+Requires:	gptfdisk
+Requires:	exfat-utils
+Requires:	lvm2
 
 %description -n %{libname}
 Main library for %{name}.
