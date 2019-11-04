@@ -73,11 +73,9 @@ Development library for %{name}.
 
 %files -f %{name}.lang
 %{_qt5_plugindir}/*.so
-#%{_datadir}/kservices5/*.desktop
-#%{_datadir}/kservicetypes5/*.desktop
-%{_sysconfdir}/dbus-1/system.d/org.kde.kpmcore.applicationinterface.conf
-%{_sysconfdir}/dbus-1/system.d/org.kde.kpmcore.externalcommand.conf
-%{_sysconfdir}/dbus-1/system.d/org.kde.kpmcore.helperinterface.conf
+%{_datadir}/dbus-1/system.d/org.kde.kpmcore.applicationinterface.conf
+%{_datadir}/dbus-1/system.d/org.kde.kpmcore.externalcommand.conf
+%{_datadir}/dbus-1/system.d/org.kde.kpmcore.helperinterface.conf
 %{_libdir}/libexec/kauth/kpmcore_externalcommand
 %{_datadir}/dbus-1/system-services/org.kde.kpmcore.externalcommand.service
 %{_datadir}/polkit-1/actions/org.kde.kpmcore.externalcommand.policy
