@@ -48,6 +48,7 @@ Requires:	f2fs-tools
 Requires:	gptfdisk
 Requires:	exfat-utils
 Requires:	lvm2
+Requires:	util-linux
 
 %description -n %{libname}
 Main library for %{name}.
