@@ -4,8 +4,8 @@
 
 Summary:	Library for managing partitions
 Name:		kpmcore
-Version:	4.0.1
-Release:	2
+Version:	4.1.0
+Release:	1
 License:	GPLv3
 Group:		System/Libraries
 Url:		http://www.kde.org
@@ -44,7 +44,7 @@ Suggests:	jfsutils
 Suggests:	reiserfsprogs
 Suggests:	ntfs-3g
 Requires:	btrfs-progs
-Suggests:	f2fs-tools
+Requires:	f2fs-tools
 Requires:	gptfdisk
 Requires:	exfat-utils
 Requires:	lvm2
