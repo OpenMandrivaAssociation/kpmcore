@@ -75,6 +75,8 @@ Development library for %{name}.
 
 %files -f %{name}.lang
 %{_qt5_plugindir}/*.so
+%{_libexecdir}/kpmcore_externalcommand
+%{_datadir}/dbus-1/system-services/org.kde.kpmcore.helperinterface.service
 %{_datadir}/dbus-1/system.d/org.kde.kpmcore.helperinterface.conf
 %{_datadir}/polkit-1/actions/org.kde.kpmcore.externalcommand.policy
 
