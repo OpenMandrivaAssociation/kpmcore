@@ -4,7 +4,7 @@
 
 Summary:	Library for managing partitions
 Name:		kpmcore
-Version:	4.1.0
+Version:	4.2.0
 Release:	1
 License:	GPLv3
 Group:		System/Libraries
@@ -25,6 +25,7 @@ BuildRequires:	cmake(KF5Service)
 BuildRequires:	cmake(KF5WidgetsAddons)
 BuildRequires:	cmake(KF5Auth)
 BuildRequires:	cmake(Qca-qt5)
+BuildRequires:	cmake(PolkitQt5-1)
 Requires:	%{libname} = %{EVRD}
 
 %description
