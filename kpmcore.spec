@@ -1,15 +1,16 @@
 %define major 10
 %define libname %mklibname %{name} %{major}
 %define develname %mklibname %{name} -d
+%define stable %([ "`echo %{version} |cut -d. -f3`" -ge 80 ] && echo -n un; echo -n stable)
 
 Summary:	Library for managing partitions
 Name:		kpmcore
-Version:	4.2.0
+Version:	20.11.80
 Release:	1
 License:	GPLv3
 Group:		System/Libraries
 Url:		http://www.kde.org
-Source0:	http://download.kde.org/stable/kpmcore/%{version}/src/%{name}-%{version}.tar.xz
+Source0:	http://download.kde.org/%{stable}/release-service/%{version}/src/%{name}-%{version}.tar.xz
 BuildRequires:	cmake(ECM)
 BuildRequires:	pkgconfig(blkid) >= 2.33.2
 BuildRequires:	pkgconfig(libatasmart)
@@ -71,7 +72,7 @@ Development library for %{name}.
 %install
 %ninja_install -C build
 
-%find_lang %{name}
+%find_lang %{name} --all-name
 
 %files -f %{name}.lang
 %{_qt5_plugindir}/*.so
@@ -82,7 +83,7 @@ Development library for %{name}.
 
 %files -n %{libname}
 %{_libdir}/lib*%{name}.so.%{major}*
-%{_libdir}/lib*%{name}.so.4.*
+%{_libdir}/lib*%{name}.so.20.*
 
 %files -n %{develname}
 %dir %{_libdir}/cmake/KPMcore
