@@ -5,7 +5,7 @@
 
 Summary:	Library for managing partitions
 Name:		kpmcore
-Version:	21.03.90
+Version:	21.04.0
 Release:	1
 License:	GPLv3
 Group:		System/Libraries
