@@ -1,11 +1,11 @@
-%define major 11
+%define major 12
 %define libname %mklibname %{name} %{major}
 %define develname %mklibname %{name} -d
 %define stable %([ "`echo %{version} |cut -d. -f3`" -ge 80 ] && echo -n un; echo -n stable)
 
 Summary:	Library for managing partitions
 Name:		kpmcore
-Version:	21.12.2
+Version:	22.03.80
 Release:	1
 License:	GPLv3
 Group:		System/Libraries
@@ -75,7 +75,7 @@ Development library for %{name}.
 %find_lang %{name} --all-name
 
 %files -f %{name}.lang
-%{_qt5_plugindir}/*.so
+%{_qt5_plugindir}/kpmcore
 %{_libdir}/libexec/kpmcore_externalcommand
 %{_datadir}/dbus-1/system-services/org.kde.kpmcore.helperinterface.service
 %{_datadir}/dbus-1/system.d/org.kde.kpmcore.helperinterface.conf
