@@ -6,26 +6,20 @@
 Summary:	Library for managing partitions
 Name:		kpmcore
 Version:	22.12.3
-Release:	2
+Release:	3
 License:	GPLv3
 Group:		System/Libraries
 Url:		http://www.kde.org
 Source0:	http://download.kde.org/%{stable}/release-service/%{version}/src/%{name}-%{version}.tar.xz
 BuildRequires:	cmake(ECM)
 BuildRequires:	pkgconfig(blkid) >= 2.33.2
-BuildRequires:	pkgconfig(libatasmart)
-BuildRequires:	pkgconfig(libparted)
 BuildRequires:	pkgconfig(Qt5Core) >= 5.3.0
 BuildRequires:	pkgconfig(Qt5DBus) >= 5.3.0
 BuildRequires:	pkgconfig(Qt5Gui) >= 5.3.0
 BuildRequires:	pkgconfig(Qt5Widgets) >= 5.3.0
 BuildRequires:	cmake(KF5I18n)
-BuildRequires:	cmake(KF5KIO)
-BuildRequires:	cmake(KF5IconThemes)
-BuildRequires:	cmake(KF5Service)
+BuildRequires:	cmake(KF5CoreAddons)
 BuildRequires:	cmake(KF5WidgetsAddons)
-BuildRequires:	cmake(KF5Auth)
-BuildRequires:	cmake(Qca-qt5)
 BuildRequires:	cmake(PolkitQt5-1)
 Requires:	%{libname} = %{EVRD}
 
@@ -36,7 +30,6 @@ Common code for KDE Partition Manager and other projects.
 %package -n %{libname}
 Summary:	Main library for %{name}
 Group:		System/Libraries
-Requires:	%{_lib}qca2-plugin-openssl
 Requires:	e2fsprogs
 Requires:	dosfstools
 Requires:	fatresize
