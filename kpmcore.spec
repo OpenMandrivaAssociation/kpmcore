@@ -1,12 +1,12 @@
 %define major 12
 %define libname %mklibname %{name} %{major}
 %define develname %mklibname %{name} -d
-%define stable %([ "`echo %{version} |cut -d. -f3`" -ge 80 ] && echo -n un; echo -n stable)
+%define stable %([ "$(echo %{version} |cut -d. -f3)" -ge 80 ] && echo -n un; echo -n stable)
 
 Summary:	Library for managing partitions
 Name:		kpmcore
 Version:	22.12.3
-Release:	3
+Release:	4
 License:	GPLv3
 Group:		System/Libraries
 Url:		http://www.kde.org
@@ -22,14 +22,6 @@ BuildRequires:	cmake(KF5CoreAddons)
 BuildRequires:	cmake(KF5WidgetsAddons)
 BuildRequires:	cmake(PolkitQt5-1)
 Requires:	%{libname} = %{EVRD}
-
-%description
-Library for managing partitions.
-Common code for KDE Partition Manager and other projects.
-
-%package -n %{libname}
-Summary:	Main library for %{name}
-Group:		System/Libraries
 Requires:	e2fsprogs
 Requires:	dosfstools
 Requires:	fatresize
@@ -40,9 +32,22 @@ Suggests:	ntfs-3g
 Requires:	btrfs-progs
 Requires:	f2fs-tools
 Requires:	gptfdisk
-Requires:	exfat-utils
+Requires:	exfatprogs
 Requires:	lvm2
 Requires:	util-linux
+Requires:	systemd
+Requires:	coreutils
+Requires:	smartmontools
+Requires:	mdadm
+Requires:	udftools
+
+%description
+Library for managing partitions.
+Common code for KDE Partition Manager and other projects.
+
+%package -n %{libname}
+Summary:	Main library for %{name}
+Group:		System/Libraries
 
 %description -n %{libname}
 Main library for %{name}.
