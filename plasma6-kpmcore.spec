@@ -17,6 +17,8 @@ Source0:	http://download.kde.org/%{stable}/release-service/%{version}/src/kpmcor
 %endif
 BuildRequires:	cmake(ECM)
 BuildRequires:	pkgconfig(blkid) >= 2.33.2
+BuildRequires:	qt6-qtbase-tools
+BuildRequires:	cmake(Qt6)
 BuildRequires:	cmake(Qt6Core)
 BuildRequires:	cmake(Qt6DBus)
 BuildRequires:	cmake(Qt6Gui)
