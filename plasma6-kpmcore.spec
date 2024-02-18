@@ -1,3 +1,6 @@
+%define git 20240218
+%define gitbranch release/24.02
+%define gitbranchd %(echo %{gitbranch} |sed -e "s,/,-,g")
 %define major 12
 %define libname %mklibname %{name}-kf6
 %define devname %mklibname %{name}-kf6 -d
@@ -5,15 +8,23 @@
 
 Summary:	Library for managing partitions
 Name:		plasma6-kpmcore
-Version:	24.01.95
-Release:	%{?git:0.%{git}.}1
+Version:	24.01.96
+Release:	%{?git:%{?git:0.%{git}.}0.%{git}.}1
 License:	GPLv3
 Group:		System/Libraries
 Url:		https://www.kde.org/
 %if 0%{?git:1}
+%if 0%{?git:1}
+Source0:	https://invent.kde.org/system/kpmcore/-/archive/%{gitbranch}/kpmcore-%{gitbranchd}.tar.bz2#/kpmcore-%{git}.tar.bz2
+%else
 Source0:	https://invent.kde.org/system/kpmcore/-/archive/master/kpmcore-master.tar.bz2#/kpmcore-%{git}.tar.bz2
+%endif
+%else
+%if 0%{?git:1}
+Source0:	https://invent.kde.org/system/kpmcore/-/archive/%{gitbranch}/kpmcore-%{gitbranchd}.tar.bz2#/kpmcore-%{git}.tar.bz2
 %else
 Source0:	http://download.kde.org/%{stable}/release-service/%{version}/src/kpmcore-%{version}.tar.xz
+%endif
 %endif
 BuildRequires:	cmake(ECM)
 BuildRequires:	pkgconfig(blkid) >= 2.33.2
@@ -68,7 +79,7 @@ Requires:	%{libname} = %{EVRD}
 Development library for %{name}.
 
 %prep
-%autosetup -p1 -n kpmcore-%{?git:master}%{!?git:%{version}}
+%autosetup -p1 -n kpmcore-%{?git:%{gitbranchd}}%{!?git:%{version}}
 %cmake \
 	-DBUILD_QCH:BOOL=ON \
 	-DQT_MAJOR_VERSION=6 \
