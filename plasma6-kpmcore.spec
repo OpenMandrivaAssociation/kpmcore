@@ -1,4 +1,4 @@
-%define git 20240218
+#define git 20240218
 %define gitbranch release/24.02
 %define gitbranchd %(echo %{gitbranch} |sed -e "s,/,-,g")
 %define major 12
@@ -8,7 +8,7 @@
 
 Summary:	Library for managing partitions
 Name:		plasma6-kpmcore
-Version:	24.01.96
+Version:	24.02.0
 Release:	%{?git:%{?git:0.%{git}.}0.%{git}.}1
 License:	GPLv3
 Group:		System/Libraries
