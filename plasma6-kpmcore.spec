@@ -9,7 +9,7 @@
 Summary:	Library for managing partitions
 Name:		plasma6-kpmcore
 Version:	24.08.1
-Release:	%{?git:%{?git:0.%{git}.}0.%{git}.}1
+Release:	%{?git:%{?git:0.%{git}.}0.%{git}.}2
 License:	GPLv3
 Group:		System/Libraries
 Url:		https://www.kde.org/
@@ -58,6 +58,11 @@ Requires:	coreutils
 Requires:	smartmontools
 Requires:	mdadm
 Requires:	udftools
+
+%patchlist
+# Make calamares Great Again
+# https://github.com/calamares/calamares/issues/2367
+revert-7f304be3e42b7efb72f990eacf2fa3d7640ffa23.patch
 
 %description
 Library for managing partitions.
