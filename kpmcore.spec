@@ -9,7 +9,7 @@ Version:	23.08.5
 Release:	2
 License:	GPLv3
 Group:		System/Libraries
-Url:		http://www.kde.org
+Url:		https://www.kde.org
 Source0:	http://download.kde.org/%{stable}/release-service/%{version}/src/%{name}-%{version}.tar.xz
 BuildRequires:	cmake(ECM)
 BuildRequires:	pkgconfig(blkid) >= 2.33.2
