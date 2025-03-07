@@ -8,7 +8,7 @@
 
 Summary:	Library for managing partitions
 Name:		plasma6-kpmcore
-Version:	24.12.2
+Version:	24.12.3
 Release:	%{?git:%{?git:0.%{git}.}0.%{git}.}1
 License:	GPLv3
 Group:		System/Libraries
