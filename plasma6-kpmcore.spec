@@ -1,15 +1,15 @@
 #define git 20240218
 %define gitbranch release/24.02
 %define gitbranchd %(echo %{gitbranch} |sed -e "s,/,-,g")
-%define major 12
+%define major 13
 %define libname %mklibname %{name}-kf6
 %define devname %mklibname %{name}-kf6 -d
 %define stable %([ "$(echo %{version} |cut -d. -f3)" -ge 70 ] && echo -n un; echo -n stable)
 
 Summary:	Library for managing partitions
 Name:		plasma6-kpmcore
-Version:	24.12.3
-Release:	%{?git:%{?git:0.%{git}.}0.%{git}.}3
+Version:	25.04.0
+Release:	%{?git:%{?git:0.%{git}.}0.%{git}.}1
 License:	GPLv3
 Group:		System/Libraries
 Url:		https://www.kde.org/
