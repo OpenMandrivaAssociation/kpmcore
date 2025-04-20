@@ -1,0 +1,31 @@
+commit 3c816032088ff733bbad1b6ebe89418183fd3ac7
+Author: Bernhard Rosenkränzer <bero@lindev.ch>
+Date:   Sun Apr 20 03:48:09 2025 +0200
+
+    Revert "Fix a memory leak by actually freeing a correct pointer"
+    
+    This reverts commit 8b4b5c86cfd278fa0cf3e05f6ad2cd33ca1bd600.
+
+diff --git a/src/plugins/sfdisk/sfdiskbackend.cpp b/src/plugins/sfdisk/sfdiskbackend.cpp
+index e47c4e5..3c4b900 100644
+--- a/src/plugins/sfdisk/sfdiskbackend.cpp
++++ b/src/plugins/sfdisk/sfdiskbackend.cpp
+@@ -108,7 +108,7 @@ QList<Device*> SfdiskBackend::scanDevices(const ScanFlags scanFlags)
+                 result.append(device);
+             }
+         }
+-
++        
+     }
+ 
+     VolumeManagerDevice::scanDevices(result); // scan all types of VolumeManagerDevices
+@@ -337,8 +337,8 @@ void SfdiskBackend::scanWholeDevicePartition(Device& d) {
+     Partition *partition = scanPartition(d, partitionNode, firstSector, lastSector, QString(), false);
+ 
+     if (partition->fileSystem().type() == FileSystem::Type::Unknown) {
+-        delete d.partitionTable();
+         setPartitionTableForDevice(d, nullptr);
++        delete d.partitionTable();
+     }
+ 
+     if (!partition->roles().has(PartitionRole::Luks))
