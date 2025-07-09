@@ -7,7 +7,7 @@
 %define stable %([ "$(echo %{version} |cut -d. -f3)" -ge 70 ] && echo -n un; echo -n stable)
 
 Summary:	Library for managing partitions
-Name:		plasma6-kpmcore
+Name:		kpmcore
 Version:	25.04.0
 Release:	%{?git:%{?git:0.%{git}.}0.%{git}.}2
 License:	GPLv3
