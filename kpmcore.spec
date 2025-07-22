@@ -8,8 +8,8 @@
 
 Summary:	Library for managing partitions
 Name:		kpmcore
-Version:	25.04.0
-Release:	%{?git:%{?git:0.%{git}.}0.%{git}.}2
+Version:	25.04.3
+Release:	%{?git:%{?git:0.%{git}.}0.%{git}.}1
 License:	GPLv3
 Group:		System/Libraries
 Url:		https://www.kde.org/
@@ -59,6 +59,11 @@ Requires:	smartmontools
 Requires:	mdadm
 Requires:	udftools
 
+%rename plasma6-kpmcore
+
+BuildSystem:	cmake
+BuildOption:	-DKDE_INSTALL_USE_QT_SYS_PATHS:BOOL=ON
+
 %patchlist
 # Make calamares Great Again
 # Without this, calamares crashes on startup with an unpartitioned disk
@@ -82,22 +87,6 @@ Requires:	%{libname} = %{EVRD}
 
 %description -n %{devname}
 Development library for %{name}.
-
-%prep
-%autosetup -p1 -n kpmcore-%{?git:%{gitbranchd}}%{!?git:%{version}}
-%cmake \
-	-DBUILD_QCH:BOOL=ON \
-	-DQT_MAJOR_VERSION=6 \
-	-DKDE_INSTALL_USE_QT_SYS_PATHS:BOOL=ON \
-	-G Ninja
-
-%build
-%ninja -C build
-
-%install
-%ninja_install -C build
-
-%find_lang %{name} --all-name
 
 %files -f %{name}.lang
 %{_qtdir}/plugins/kpmcore
