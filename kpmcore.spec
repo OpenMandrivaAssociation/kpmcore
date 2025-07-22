@@ -6,7 +6,7 @@
 %define devname %mklibname %{name}-kf6 -d
 # Renamed after 6.0 2025/07/22
 %define oldlibname %mklibname plasma6-%{name}-kf6
-%define olddevname %mklibname plasma6-%{name}-kf6
+%define olddevname %mklibname -d plasma6-%{name}-kf6
 %define stable %([ "$(echo %{version} |cut -d. -f3)" -ge 70 ] && echo -n un; echo -n stable)
 
 Summary:	Library for managing partitions
