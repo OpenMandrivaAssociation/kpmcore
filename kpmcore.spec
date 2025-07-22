@@ -4,6 +4,9 @@
 %define major 13
 %define libname %mklibname %{name}-kf6
 %define devname %mklibname %{name}-kf6 -d
+# Renamed after 6.0 2025/07/22
+%define oldlibname %mklibname plasma6-%{name}-kf6
+%define olddevname %mklibname plasma6-%{name}-kf6
 %define stable %([ "$(echo %{version} |cut -d. -f3)" -ge 70 ] && echo -n un; echo -n stable)
 
 Summary:	Library for managing partitions
@@ -76,6 +79,7 @@ Common code for KDE Partition Manager and other projects.
 %package -n %{libname}
 Summary:	Main library for %{name}
 Group:		System/Libraries
+%rename %{oldlibname}
 
 %description -n %{libname}
 Main library for %{name}.
@@ -84,6 +88,7 @@ Main library for %{name}.
 Summary:	Development library for %{name}
 Group:		Development/KDE and Qt
 Requires:	%{libname} = %{EVRD}
+%rename %{olddevname}
 
 %description -n %{devname}
 Development library for %{name}.
