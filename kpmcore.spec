@@ -11,8 +11,8 @@
 
 Summary:	Library for managing partitions
 Name:		kpmcore
-Version:	25.08.3
-Release:	%{?git:%{?git:0.%{git}.}0.%{git}.}2
+Version:	25.12.0
+Release:	%{?git:%{?git:0.%{git}.}0.%{git}.}1
 License:	GPLv3
 Group:		System/Libraries
 Url:		https://www.kde.org/
